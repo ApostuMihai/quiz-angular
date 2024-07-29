@@ -55,8 +55,7 @@ export class QuizQuestionsComponent {
         };
       });
       this.selectedAnswers = new Array(this.quizQuestions.length).fill(null);
-      this.showResults = false; // Reset results view
-      console.log(this.quizQuestions);
+      this.showResults = false; 
     } catch (error) {
       console.error('Error loading quiz questions', error);
     }
