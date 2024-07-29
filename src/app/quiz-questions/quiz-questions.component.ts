@@ -8,7 +8,6 @@ import { QuizApiResponse, QuizQuestion } from '../quiz-question';
   imports: [CommonModule],
   template: `
   <div class="game-container">
-
   <button class="start-btn" *ngIf="!gameStarted" type="button" (click)="startGame()">Start the game!</button>
   <div *ngIf="gameStarted">
     <div class="question-container" *ngFor="let question of quizQuestions; let i = index">
@@ -27,7 +26,6 @@ import { QuizApiResponse, QuizQuestion } from '../quiz-question';
     <button type="button" (click)="getQuestions()">Next question</button>
   </div>
   </div>
-
 `,
   styleUrl: './quiz-questions.component.css'
 })

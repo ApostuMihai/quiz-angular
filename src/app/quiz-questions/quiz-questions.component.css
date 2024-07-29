@@ -1,24 +1,18 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: "Roboto";
+
+
+.game-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0 auto;
+  width: 430px;
+  height: 932px;
+  background-color: #E2E58D;
+  align-items: center;
+  justify-content: center;
 }
-
-
-  .game-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15rem;
-    margin: 0 auto;
-    width: 100vw;
-    height: 100vh;
-    background-color: #E2E58D;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .start-btn{
+.start-btn{
     margin: 0 auto;
     width: 40vw;
     height: 5vh;
@@ -29,12 +23,12 @@
     transition: all 0.3s;
 }
 
-    .start-btn:hover{
+.start-btn:hover{
         background-color: #65653b;
     }
 
 
-    .answers-list{
+.answers-list{
         display: flex;
         flex-direction: column;
         gap: 7px;
@@ -42,7 +36,7 @@
         margin-top: 12.5px;
         list-style: none;
     }
-    .answers-option{
+.answers-option{
         background-color:#65653b;
         width: 80%;
         color: white;
@@ -51,21 +45,21 @@
         border-radius: 5px;
     }
 
-    .question-container{
+.question-container{
         align-items: center;
         margin: 0 12.5px 15px;
     }
 
-    .selected {
+.selected {
         background-color: rgb(7, 76, 195);
         color: white;
       }
-    .correct {
+.correct {
         background-color: rgb(4, 221, 4);
         color: white;
       }
       
-    .incorrect {
+.incorrect {
         background-color: red;
         color: white;
       }
