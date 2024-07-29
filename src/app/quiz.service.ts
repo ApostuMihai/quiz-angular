@@ -4,21 +4,46 @@ import { QuizApiResponse } from './quiz-question';
   providedIn: 'root'
 })
 export class QuizService {
-  private apiUrl = 'https://opentdb.com/api.php?amount=1&category=9';
 
-  async getQuizQuestions(): Promise<QuizApiResponse> {
+  async getQuizQuestions(category: number): Promise<any> {
     try {
-      const data = await fetch(this.apiUrl);
-      if (!data.ok) {
-        throw new Error(`HTTP error! status: ${data.status}`);
-      }
-      const response: QuizApiResponse = await data.json();
-      return response;
+      const apiUrl = `https://opentdb.com/api.php?amount=1&category=${category}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    return data;
     } catch (error) {
       console.error('Error fetching quiz questions:', error);
       return { response_code: 1, results: [] };
     }
   }
-
+  getCategories() {
+    return this.categories;
+  }
+  categories = [
+    { name: 'General Knowledge', value: 9 },
+    { name: 'Entertainment: Books', value: 10 },
+    { name: 'Entertainment: Film', value: 11 },
+    { name: 'Entertainment: Music', value: 12 },
+    { name: 'Entertainment: Musicals & Theatres', value: 13 },
+    { name: 'Entertainment: Television', value: 14 },
+    { name: 'Entertainment: Video Games', value: 15 },
+    { name: 'Entertainment: Board Games', value: 16 },
+    { name: 'Science & Nature', value: 17 },
+    { name: 'Science: Computers', value: 18 },
+    { name: 'Science: Mathematics', value: 19 },
+    { name: 'Mythology', value: 20 },
+    { name: 'Sports', value: 21 },
+    { name: 'Geography', value: 22 },
+    { name: 'History', value: 23 },
+    { name: 'Politics', value: 24 },
+    { name: 'Art', value: 25 },
+    { name: 'Celebrities', value: 26 },
+    { name: 'Animals', value: 27 },
+    { name: 'Vehicles', value: 28 },
+    { name: 'Entertainment: Comics', value: 29 },
+    { name: 'Science: Gadgets', value: 30},
+    { name: 'Entertainment: Japanese Anime & Manga', value: 31},
+    { name: 'Entertainment: Cartoon & Animations', value: 32}
+  ];
   } 
 

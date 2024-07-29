@@ -1,4 +1,6 @@
 
+
+
 .game-container{
   display: flex;
   flex-direction: column;
@@ -11,20 +13,6 @@
   align-items: center;
   justify-content: center;
 }
-.start-btn{
-    margin: 0 auto;
-    width: 40vw;
-    height: 5vh;
-    background-color:#a2a463 ;
-    border-radius: 10px;
-    color: white;
-    border: none;
-    transition: all 0.3s;
-}
-
-.start-btn:hover{
-        background-color: #65653b;
-    }
 
 
 .answers-list{
@@ -49,16 +37,71 @@
         margin: 0 12.5px 15px;
     }
 
+.buttons-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12.5px;
+}
+
+.submit-button {
+  width: 60vw;
+  height: 4vh;
+  background-color:#309c66 ;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.submit-button:hover{
+      background-color: #195e32;
+  }
+
+.next-button{
+  width: 60vw;
+  height: 4vh;
+  background-color:#664646 ;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.next-button:hover{
+      background-color: #201a1a;
+  }
+.next-button:disabled{
+  background-color: #65663d;
+  cursor: not-allowed;
+}
+.start-btn{
+  margin: 0 auto;
+  width: 40vw;
+  height: 5vh;
+  background-color:#a2a463 ;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  transition: all 0.3s;
+}
+
+.start-btn:hover{
+      background-color: #65653b;
+  }
+
+
 .selected {
         background-color: rgb(7, 76, 195);
         color: white;
       }
 .correct {
         background-color: rgb(4, 221, 4);
-        color: white;
+        color: black;
       }
       
 .incorrect {
         background-color: red;
-        color: white;
+        color: black;
       }

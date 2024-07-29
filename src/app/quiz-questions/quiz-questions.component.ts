@@ -2,13 +2,17 @@ import { CommonModule} from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { QuizService } from '../quiz.service';
 import { QuizApiResponse, QuizQuestion } from '../quiz-question';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 @Component({
   selector: 'app-quiz-questions',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
   <div class="game-container">
-  <button class="start-btn" *ngIf="!gameStarted" type="button" (click)="startGame()">Start the game!</button>
+    <button class="start-btn" *ngIf="!gameStarted" type="button" (click)="startGame()">Start the game!</button>
+  <select [disabled]="gameStarted" [(ngModel)]="selectedCategory">
+          <option *ngFor="let category of categories" [value]="category.value">{{ category.name }}</option>
+        </select>
   <div *ngIf="gameStarted">
     <div class="question-container" *ngFor="let question of quizQuestions; let i = index">
       <h3>{{ question.question }}</h3>
@@ -22,8 +26,10 @@ import { QuizApiResponse, QuizQuestion } from '../quiz-question';
         </li>
       </ul>
     </div>
-    <button type="submit" (click)="checkAnswers()">Check</button>
-    <button type="button" (click)="getQuestions()">Next question</button>
+    <div class="buttons-container">
+    <button class="submit-button" type="submit" (click)="checkAnswers()">Check</button>
+    <button class="next-button" type="button" [disabled]="!isChecked" (click)="getQuestions()">Next question</button>
+    </div>
   </div>
   </div>
 `,
@@ -34,10 +40,16 @@ export class QuizQuestionsComponent {
   selectedAnswers: string[] = [];
   gameStarted: boolean = false;
   showResults: boolean = false;
+  isChecked: boolean = false;
+  selectedCategory: number = 9; 
+  categories: any[] = []
   quizService: QuizService = inject(QuizService);
 
+  
   constructor() {}
-
+  ngOnInit(): void {
+    this.categories = this.quizService.getCategories();
+  }
   async startGame(): Promise<void> {
     this.gameStarted = true;
     await this.getQuestions();
@@ -45,7 +57,7 @@ export class QuizQuestionsComponent {
 
   async getQuestions(): Promise<void> {
     try {
-      const data: QuizApiResponse = await this.quizService.getQuizQuestions();
+      const data: QuizApiResponse = await this.quizService.getQuizQuestions(this.selectedCategory);
       this.quizQuestions = data.results.map((question: QuizQuestion) => {
         return {
           ...question,
@@ -56,6 +68,7 @@ export class QuizQuestionsComponent {
       });
       this.selectedAnswers = new Array(this.quizQuestions.length).fill(null);
       this.showResults = false; 
+      this.isChecked = false;
     } catch (error) {
       console.error('Error loading quiz questions', error);
     }
@@ -79,5 +92,6 @@ export class QuizQuestionsComponent {
 
   checkAnswers(): void {
     this.showResults = true;
+    this.isChecked = true;
   }
 }
